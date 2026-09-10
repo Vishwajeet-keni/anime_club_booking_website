@@ -1,22 +1,39 @@
 import { EventRow } from '@/lib/events';
 
 export default function EventCard({ event, onClick }: { event: EventRow; onClick: () => void }) {
-  const date = new Date(event.event_date).toLocaleDateString('en-IN', {
+  const eventDateObj = new Date(event.event_date);
+  const isPast = eventDateObj.getTime() < Date.now();
+
+  const date = eventDateObj.toLocaleDateString('en-IN', {
     day: '2-digit', month: 'short', year: 'numeric',
   });
-  const time = new Date(event.event_date).toLocaleTimeString('en-IN', {
+  const time = eventDateObj.toLocaleTimeString('en-IN', {
     hour: '2-digit', minute: '2-digit',
   });
   const ticketNo = event.id.slice(0, 6).toUpperCase();
 
+  // Determine badge label
+  let ticketStatus = 'ADMIT ONE';
+  if (isPast) {
+    ticketStatus = 'EVENT ENDED';
+  } else if (!event.registration_open) {
+    ticketStatus = 'CLOSED';
+  }
+
   return (
     <button
       onClick={onClick}
-      className="ticket-rise relative w-full text-left rounded-md overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.35)] transition-transform hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-yellow)]"
+      className={`ticket-rise relative w-full text-left rounded-md overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.35)] transition-all hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-yellow)] ${
+        isPast ? 'opacity-85 hover:opacity-100' : ''
+      }`}
       style={{ backgroundColor: 'var(--ticket)', color: 'var(--ticket-ink)' }}
     >
       {event.poster_url ? (
-        <img src={event.poster_url} alt="" className="w-full h-36 object-cover" />
+        <img 
+          src={event.poster_url} 
+          alt={event.title} 
+          className={`w-full h-36 object-cover ${isPast ? 'grayscale-[35%]' : ''}`} 
+        />
       ) : (
         <div
           className="w-full h-36"
@@ -41,7 +58,9 @@ export default function EventCard({ event, onClick }: { event: EventRow; onClick
       </div>
 
       <div className="flex items-center justify-between px-5 py-3 font-mono text-xs">
-        <span>{event.registration_open ? 'ADMIT ONE' : 'SOLD OUT'}</span>
+        <span className={isPast || !event.registration_open ? 'opacity-60' : 'font-bold'}>
+          {ticketStatus}
+        </span>
         <span className="opacity-60">№ {ticketNo}</span>
       </div>
     </button>
