@@ -28,7 +28,7 @@ export default function Navbar() {
           <div className="relative w-9 h-9 sm:w-11 sm:h-11 flex-shrink-0 flex items-center justify-center">
             <Image
               src="/favicon.ico"
-              alt="Anime Club Logo"
+              alt="Otaku Club Logo"
               width={44}
               height={44}
               className="w-full h-full object-contain rounded-md transition-transform duration-200 group-hover:scale-105"
@@ -38,7 +38,7 @@ export default function Navbar() {
 
           <div className="flex flex-col justify-center select-none">
             <span className="font-display uppercase tracking-wider text-lg sm:text-xl leading-none text-[#f3efe6] group-hover:text-white transition-colors">
-              ANIME CLUB
+              Otaku CLUB
             </span>
             <span 
               className="font-display uppercase tracking-widest text-[9px] sm:text-[10px] mt-1 font-bold"
