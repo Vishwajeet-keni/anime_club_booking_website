@@ -111,7 +111,7 @@ export default function ContactPage() {
                 </p>
 
                 <h2 className="mt-3 text-2xl font-bold">
-                  Anime Club
+                  Otaku Club
                 </h2>
 
                 <div className="mt-7 space-y-6 text-sm">
