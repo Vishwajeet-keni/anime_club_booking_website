@@ -1,19 +1,36 @@
 @import "tailwindcss";
 
 :root {
+  /* 1. Global Dark Background Canvas */
   --bg: #0d0b14;
+  --bg-surface: #141019;
+  --bg-surface-elevated: #1e1826;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  /* 2. Unified Brand Accents */
+  --accent-pink: #e63462;
+  --accent-pink-hover: #d12351;
+  --accent-yellow: #f5a623;
+
+  /* 3. Primary Typography (High Contrast) */
+  --text: #f1ede4;
+  --text-main: #f1ede4;
+  --text-muted: #8b8496;
+  --text-faint: #5e5769;
+
+  /* 4. Ticket Stub Surfaces (Events Grid & Modals) */
   --ticket: #f3ecdd;
   --ticket-ink: #1b1420;
-  --accent-pink: #e63462;
-  --accent-yellow: #f5a623;
-  --text: #f1ede4;
-  --text-muted: #8b8496;
+  --ticket-muted: #5e5564;
+  --ticket-border: rgba(27, 20, 32, 0.18);
 }
 
 body {
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-body), sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .font-display {
